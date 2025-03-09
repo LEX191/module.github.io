@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Welcome to E-Book Library</title>
+    <style>
+        /* Apply background to the whole page */
+        body {
+            background: url('school.png') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: white;
+        }
+
+        /* Additional styling for your main section */
+        .main {
+            background: rgba(0, 0, 0, 0.5); /* Darken the background to make text more readable */
+            padding: 50px;
+        }
+
+        /* Navbar and other sections */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:50px;
+            background-color: rgba(0, 0, 0, 0.6);
+        }
+
+        /* Other styles for your content */
+        .content {
+            padding: 20px;
+        }
+
+        /* Start Button styling */
+        .cn a {
+            text-decoration: none;
+            color: white;
+            background-color: #fc8f00; /* Keeping the green background color */
+            padding: 1px 20px;
+            border-radius: 250px;
+        }
+
+        .form {
+            margin-top: 200px;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 300px;
+            border-radius: 250px;
+            width: 300px;
+            text-align: center;
+            margin-left: 400px;
+            margin-right: auto; /* Center the form */
+        }
+
+        .form input {
+            width: 400%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .form button {
+            padding: 10px;
+            background-color: #ff9100;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .form button:hover {
+            background-color: #ffae00;
+        }
+
+        .form a {
+            color: #ffae00;
+            text-decoration: none;
+        }
+
+        .icons {
+            margin-top: -1px;
+        }
+
+        .icons a {
+            color: white;
+            margin: 5px;
+            font-size: 30px;
+        }
+    </style>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">One Team Organization'</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
+
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+        </div>
+        <div class="content">
+            <h1>Welcome to Organization's<br><span>E'BOOK LIBRARY</span></h1>
+            <p class="par">Welcome to One Team</p>
+            <!-- START button now links to the main page -->
+            <button class="cn"><a href="main.html">START</a></button>
+        </div>
+
+        <!-- Login Form -->
+        <div class="form">
+            <h2>Sign Up Here</h2>
+            <input type="email" id="loginEmail" placeholder="Enter Email Here">
+            <input type="password" id="loginPassword" placeholder="Enter Password Here">
+            <button class="btnn" id="loginButton">Login</button>
+
+            <p class="link">Don't have an account<br>
+            <a href="#" id="registerLink">Sign up </a> here</a></p>
+            <p class="liw">Log in with</p>
+
+            <div class="icons">
+                <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    <script>
+        // Login form submission
+        document.getElementById('loginButton').addEventListener('click', async () => {
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+
+            try {
+                const response = await fetch('/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email, password })
+                });
+
+                if (response.ok) {
+                    const { token } = await response.json();
+                    // Store the token (e.g., in localStorage) and redirect the user
+                    localStorage.setItem('authToken', token);
+                    window.location.href = '/main.html';
+                } else {
+                    const { message } = await response.json();
+                    alert(message);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+
+        // Registration link click
+        document.getElementById('registerLink').addEventListener('click', () => {
+            window.location.href = '/register.html';
+        });
+    </script>
+</body>
+</html>

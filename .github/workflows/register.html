@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    /* Add your styles here */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff3e0; /* Light orange background */
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      max-width: 400px;
+      margin: 0 auto;
+    }
+
+    .form-container h2 {
+      color: #ff5722; /* Darker orange for the heading */
+      text-align: center;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      border: 1px solid #ff5722; /* Orange border */
+      border-radius: 4px;
+      box-sizing: border-box;
+    }
+
+    .form-container button {
+      background-color: #ff5722; /* Orange button */
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .form-container button:hover {
+      background-color: #e64a19; /* Darker orange on hover */
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Sign Up Here</h2>
+    <form id="loginForm">
+      <input type="email" id="loginEmail" placeholder="Enter Email" required>
+      <input type="password" id="loginPassword" placeholder="Enter Password" required>
+      <button type="submit">Sign Up</button>
+      <p><a href="#" id="forgotPasswordLink">Forgot Password? Click here</a></p>
+    </form>
+  </div>
+
+  <!-- Password Reset Request Form (initially hidden) -->
+  <div class="form-container" id="resetRequestContainer" style="display: none;">
+    <h2>Reset Password</h2>
+    <form id="resetRequestForm">
+      <input type="email" id="resetEmail" placeholder="Enter your email" required>
+      <button type="submit">Send Reset Link</button>
+      <button type="button" id="cancelResetRequest">Cancel</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const emailInput = document.getElementById('loginEmail');
+      const passwordInput = document.getElementById('loginPassword');
+
+      const email = emailInput.value;
+      const password = passwordInput.value;
+
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        if (response.ok) {
+          // Successful login
+          window.location.href = '/dashboard.html'; // Redirect to the dashboard
+        } else {
+          const { message } = await response.json();
+          alert(message); // Show error message
+          // Show the reset password option
+          document.getElementById('resetRequestContainer').style.display = 'block';
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+
+    document.getElementById('forgotPasswordLink').addEventListener('click', (event) => {
+      event.preventDefault();
+      document.getElementById('resetRequestContainer').style.display = 'block';
+    });
+
+    document.getElementById('resetRequestForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+
+      const emailInput = document.getElementById('resetEmail');
+
+      const email = emailInput.value;
+
+      try {
+        const response = await fetch('/reset-request', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email })
+        });
+
+        const { message } = await response.json();
+        alert(message);
+        document.getElementById('resetRequestContainer').style.display = 'none'; // Hide form after submission
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+
+    document.getElementById('cancelResetRequest').addEventListener('click', () => {
+      document.getElementById('resetRequestContainer').style.display = 'none'; // Hide the reset request form
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Main Page</title>
+    <style>
+        /* General background */
+        body {
+            background: url('main.jpg') no-repeat center center fixed;
+            background-size: cover;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            color: rgb(255, 115, 0); /* Orange Text */
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 50px;
+            background-color: rgba(0, 0, 0, 0.7); /* Darker Navbar */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .logo {
+            color: #ff7300;
+            font-size: 24px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .navbar .menu ul {
+            display: flex;
+            gap: 15px;
+        }
+
+        .navbar .menu ul li {
+            list-style: none;
+        }
+
+        .navbar .menu ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+        }
+
+        .navbar .menu ul li a:hover {
+            color: #ff7300;
+        }
+
+        .navbar .search input {
+            padding: 8px 15px;
+            border-radius: 25px;
+            border: none;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+
+        .navbar .search button {
+            padding: 8px 20px;
+            background-color: #ff7300;
+            border: none;
+            border-radius: 25px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .navbar .search button:hover {
+            background-color: #ff5722;
+        }
+
+        /* Main page content */
+        .main-content {
+            padding: 50px;
+            text-align: center;
+            margin-top: 100px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            max-width: 70%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .main-content h1 {
+            font-size: 36px;
+            color: #ff7300;
+            font-weight: bold;
+        }
+
+        .main-content p {
+            color: white;
+            font-size: 18px;
+            margin-top: 100px;
+        }
+
+        /* Styling for the boxes */
+        .boxes-container {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 30px;
+        }
+
+        .box {
+            width: 200px;
+            height: 250px;
+            background-color: rgba(255, 255, 255, 0.7); /* Light background for visibility */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 15px;
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+            margin: 100px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        .box:hover {
+            transform: scale(1.05);
+            background-color: rgba(255, 115, 0, 0.8); /* Orange on hover */
+        }
+
+        .box span {
+            font-size: 20px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <h2 class="logo">One Team Organization</h2>
+            </div>
+
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">DESIGN</a></li>
+                    <li><a href="#">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type to search...">
+                <button class="btn">Search</button>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <h1>Welcome to the Main Page!</h1>
+            <p>Explore our exciting content below:</p>
+
+            <!-- Container for the boxes -->
+            <div class="boxes-container">
+                <div class="box">
+                    <a href="ebooks/tdmodule.pdf" target="_blank">
+                        <span>📖- TD  </span>
+                    </a>
+                </div>
+                <div class="box">
+                    <a href="ebooks/cssmodule.pdf" target="_blank">
+                        <span>📘- CSS </span>
+                    </a>
+                </div>
+                <div class="box">
+                    <span>Slot 3</span>
+                </div>
+            </div>
+        </div>
+
+</body>
+</html>
